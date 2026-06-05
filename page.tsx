@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Users, BookOpen, GraduationCap, Plus, FileText, Settings } from 'lucide-react';
+import Link from 'next/link';
 import { TEACHER_PROFILE, STUDENT_GRADES, TEACHER_COURSES } from '@/mock-data';
 
 export default function TeacherDashboard() {
@@ -15,9 +16,9 @@ export default function TeacherDashboard() {
             <h1 className="text-2xl font-bold">Halo, {TEACHER_PROFILE.name}!</h1>
             <p className="opacity-70">Selamat datang di Panel Pengajar {TEACHER_PROFILE.school}.</p>
           </div>
-          <button className="btn btn-primary">
+          <Link href="/teacher/manage-material" className="btn btn-primary">
             <Plus size={20} /> Buat Materi Baru
-          </button>
+          </Link>
         </div>
 
         {/* Stats Summary */}
@@ -65,7 +66,7 @@ export default function TeacherDashboard() {
                     <span>Avg: {course.avgScore}</span>
                   </div>
                   <div className="card-actions justify-end mt-4">
-                    <button className="btn btn-xs btn-outline">Kelola</button>
+                    <Link href="/teacher/manage-material" className="btn btn-xs btn-outline">Kelola</Link>
                   </div>
                 </div>
               </div>

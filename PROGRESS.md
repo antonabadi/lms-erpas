@@ -29,12 +29,11 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 #### Kelompok 3: Sisi Pengajar (Guru)
 - [x] **Dasbor Guru**: Ringkasan statistik (Siswa, Materi, Nilai Rata-rata).
 - [x] **Buku Nilai (Gradebook)**: Tabel rekapitulasi nilai siswa per kuis.
+- [x] **Manajemen Materi**: Form untuk upload materi baru atau membuat kuis (CRUD).
 
 ### 3. Fitur yang BELUM Diimplementasikan (Sisa Pekerjaan)
-#### Kelompok 3: Sisi Pengajar (Guru)
-- [ ] **Manajemen Materi**: Form untuk upload materi baru atau membuat kuis (CRUD).
-
 #### Infrastruktur & Logic
+- [ ] **Auth Context**: Implementasi global state untuk membedakan view Siswa dan Guru.
 - [ ] **Routing Logic**: Menghubungkan tombol "Masuk" di Login ke Dashboard secara fungsional.
 - [ ] **State Management**: Menyimpan status login sederhana secara lokal.
 - [ ] **Integrasi API**: Transisi dari `mock-data.ts` ke API asli (jika backend sudah siap).
