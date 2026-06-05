@@ -1,157 +1,113 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { ChevronLeft, Clock, Send, ChevronRight } from 'lucide-react';
-import { QUIZZES } from '@/mock-data';
+import React from 'react';
+import { Users, BookOpen, GraduationCap, Plus, FileText, Settings } from 'lucide-react';
+import { TEACHER_PROFILE, STUDENT_GRADES, TEACHER_COURSES } from '@/mock-data';
 
-export default function QuizPage({ params }: { params: { courseId: string, quizId: string } }) {
-  const quiz = QUIZZES[params.quizId as keyof typeof QUIZZES];
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [timeLeft, setTimeLeft] = useState(quiz ? quiz.durationMinutes * 60 : 0);
-
-  useEffect(() => {
-    if (timeLeft <= 0) return;
-    const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  if (!quiz) return <div className="p-10 text-center">Data kuis tidak ditemukan.</div>;
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const handleAnswer = (optionId: string) => {
-    setAnswers({ ...answers, [quiz.questions[currentIdx].id]: optionId });
-  };
-
-  const currentQuestion = quiz.questions[currentIdx];
-
+export default function TeacherDashboard() {
   return (
-    <div className="min-h-screen bg-base-200 flex flex-col">
-      {/* Header Kuis */}
-      <header className="navbar bg-base-100 shadow-sm sticky top-0 z-30 px-4">
-        <div className="flex-1">
-          <Link href={`/courses/${params.courseId}`} className="btn btn-ghost btn-sm mr-2 lg:hidden">
-            <ChevronLeft size={20} />
-          </Link>
+    <div className="min-h-screen bg-base-200 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="font-bold text-sm md:text-base truncate max-w-[200px] md:max-w-none">
-              {quiz.title}
-            </h1>
-            <span className="text-xs opacity-50">Soal {currentIdx + 1} dari {quiz.questions.length}</span>
+            <h1 className="text-2xl font-bold">Halo, {TEACHER_PROFILE.name}!</h1>
+            <p className="opacity-70">Selamat datang di Panel Pengajar {TEACHER_PROFILE.school}.</p>
           </div>
-        </div>
-        <div className="flex-none gap-4">
-          <div className={`flex items-center gap-1 font-mono font-bold ${timeLeft < 300 ? 'text-error animate-pulse' : 'text-primary'}`}>
-            <Clock size={18} />
-            {formatTime(timeLeft)}
-          </div>
-          <button className="btn btn-primary btn-sm hidden md:flex" onClick={() => (window as any).submit_modal.showModal()}>
-            Kirim Jawaban
+          <button className="btn btn-primary">
+            <Plus size={20} /> Buat Materi Baru
           </button>
         </div>
-      </header>
 
-      <div className="flex flex-col lg:flex-row flex-1 p-4 gap-6 max-w-7xl mx-auto w-full">
-        {/* Area Soal */}
-        <main className="flex-1 space-y-6">
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <div className="badge badge-outline mb-2">Pertanyaan {currentIdx + 1}</div>
-              <p className="text-lg md:text-xl font-medium leading-relaxed">
-                {currentQuestion.text}
-              </p>
-
-              <div className="mt-8 space-y-3">
-                {currentQuestion.options.map((opt) => (
-                  <label 
-                    key={opt.id} 
-                    className={`flex items-center gap-4 p-4 border-2 rounded-xl cursor-pointer transition-all hover:bg-base-200 ${
-                      answers[currentQuestion.id] === opt.id ? 'border-primary bg-primary/5' : 'border-base-300'
-                    }`}
-                  >
-                    <input 
-                      type="radio" 
-                      name="quiz-opt" 
-                      className="radio radio-primary radio-sm md:radio-md"
-                      checked={answers[currentQuestion.id] === opt.id}
-                      onChange={() => handleAnswer(opt.id)}
-                    />
-                    <span className="font-bold">{opt.id.toUpperCase()}.</span>
-                    <span>{opt.text}</span>
-                  </label>
-                ))}
-              </div>
+        {/* Stats Summary */}
+        <div className="stats shadow w-full bg-base-100 overflow-x-auto">
+          <div className="stat">
+            <div className="stat-figure text-primary">
+              <Users size={32} />
             </div>
+            <div className="stat-title">Total Siswa</div>
+            <div className="stat-value text-primary">60</div>
+            <div className="stat-desc">Dari 2 Kelas yang diajar</div>
           </div>
-
-          {/* Navigasi Bawah Mobile */}
-          <div className="flex justify-between items-center bg-base-100 p-4 rounded-xl shadow-lg md:shadow-none">
-            <button 
-              className="btn btn-ghost" 
-              disabled={currentIdx === 0}
-              onClick={() => setCurrentIdx(prev => prev - 1)}
-            >
-              <ChevronLeft size={20} /> Kembali
-            </button>
-            <button 
-              className="btn btn-primary px-8"
-              onClick={() => currentIdx < quiz.questions.length - 1 ? setCurrentIdx(prev => prev + 1) : (window as any).submit_modal.showModal()}
-            >
-              {currentIdx < quiz.questions.length - 1 ? (
-                <>Lanjut <ChevronRight size={20} /></>
-              ) : 'Selesai'}
-            </button>
-          </div>
-        </main>
-
-        {/* Sidebar Navigasi Soal (Desktop) */}
-        <aside className="w-full lg:w-80 space-y-4">
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h3 className="font-bold mb-4">Navigasi Soal</h3>
-              <div className="grid grid-cols-5 gap-2">
-                {quiz.questions.map((q, index) => (
-                  <button
-                    key={q.id}
-                    onClick={() => setCurrentIdx(index)}
-                    className={`btn btn-sm btn-square ${
-                      currentIdx === index ? 'btn-primary' : 
-                      answers[q.id] ? 'btn-success text-white' : 'btn-outline'
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
-              </div>
-              <div className="divider"></div>
-              <button className="btn btn-block btn-outline btn-error md:hidden" onClick={() => (window as any).submit_modal.showModal()}>
-                Kirim Semua Jawaban
-              </button>
+          
+          <div className="stat">
+            <div className="stat-figure text-secondary">
+              <BookOpen size={32} />
             </div>
+            <div className="stat-title">Materi Aktif</div>
+            <div className="stat-value text-secondary">12</div>
+            <div className="stat-desc">4 Bab telah selesai</div>
           </div>
-        </aside>
-      </div>
 
-      {/* Modal Konfirmasi */}
-      <dialog id="submit_modal" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box text-center">
-          <Send className="mx-auto text-primary mb-4" size={48} />
-          <h3 className="font-bold text-lg">Kumpulkan Jawaban?</h3>
-          <p className="py-4">Pastikan semua soal telah terjawab. Anda tidak dapat mengubah jawaban setelah menekan tombol kirim.</p>
-          <div className="modal-action flex flex-col gap-2">
-            <button className="btn btn-primary" onClick={() => alert('Jawaban terkirim!')}>Ya, Kirim Sekarang</button>
-            <form method="dialog">
-              <button className="btn btn-ghost w-full">Periksa Kembali</button>
-            </form>
+          <div className="stat">
+            <div className="stat-figure text-accent">
+              <GraduationCap size={32} />
+            </div>
+            <div className="stat-title">Rata-rata Nilai</div>
+            <div className="stat-value text-accent">76.5</div>
+            <div className="stat-desc">Meningkat 5% dari bulan lalu</div>
           </div>
         </div>
-      </dialog>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Daftar Kursus/Materi */}
+          <div className="lg:col-span-1 space-y-4">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <FileText size={20} /> Mata Pelajaran
+            </h2>
+            {TEACHER_COURSES.map((course) => (
+              <div key={course.id} className="card bg-base-100 shadow-sm border border-base-300">
+                <div className="card-body p-4">
+                  <h3 className="font-bold">{course.name}</h3>
+                  <div className="flex justify-between text-xs opacity-70 mt-2">
+                    <span>{course.students} Siswa</span>
+                    <span>Avg: {course.avgScore}</span>
+                  </div>
+                  <div className="card-actions justify-end mt-4">
+                    <button className="btn btn-xs btn-outline">Kelola</button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Buku Nilai (Gradebook) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <Settings size={20} /> Buku Nilai Siswa
+            </h2>
+            <div className="overflow-x-auto bg-base-100 rounded-xl shadow-sm border border-base-300">
+              <table className="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Nama Siswa</th>
+                    <th>Kelas</th>
+                    <th>Kuis</th>
+                    <th>Nilai</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {STUDENT_GRADES.map((grade) => (
+                    <tr key={grade.id}>
+                      <td className="font-medium">{grade.name}</td>
+                      <td>{grade.class}</td>
+                      <td>{grade.quizTitle}</td>
+                      <td className="font-bold">{grade.score}</td>
+                      <td>
+                        <div className={`badge badge-sm ${grade.status === 'Lulus' ? 'badge-success' : 'badge-error'} text-white`}>
+                          {grade.status}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

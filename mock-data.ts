@@ -64,3 +64,22 @@ export const USER_PROFILE = {
   school: 'SMA 1 Yayasan Pendidikan',
   avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmad'
 };
+
+export const TEACHER_PROFILE = {
+  name: 'Bpk. Budi Susanto',
+  role: 'Guru Matematika',
+  school: 'SMA 1 Yayasan Pendidikan',
+  avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Budi'
+};
+
+export const STUDENT_GRADES = [
+  { id: 1, name: 'Ahmad Siswa', class: 'X-A', quizTitle: 'Kuis Aljabar Dasar', score: 85, status: 'Lulus' },
+  { id: 2, name: 'Siti Aminah', class: 'X-A', quizTitle: 'Kuis Aljabar Dasar', score: 92, status: 'Lulus' },
+  { id: 3, name: 'Budi Cahyo', class: 'X-A', quizTitle: 'Kuis Aljabar Dasar', score: 45, status: 'Remedial' },
+  { id: 4, name: 'Dewi Lestari', class: 'X-A', quizTitle: 'Kuis Aljabar Dasar', score: 78, status: 'Lulus' },
+];
+
+export const TEACHER_COURSES = [
+  { id: 'math-101', name: 'Matematika Dasar (Aljabar)', students: 32, avgScore: 75 },
+  { id: 'math-102', name: 'Kalkulus I', students: 28, avgScore: 68 },
+];

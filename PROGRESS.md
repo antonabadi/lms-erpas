@@ -24,17 +24,15 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 #### Kelompok 2: Sisi Siswa
 - [x] **Dashboard Utama**: Header profil, widget "Lanjutkan Belajar", dan grid mata pelajaran.
 - [x] **Bottom Navigation**: Navigasi khusus mobile untuk akses cepat Beranda, Kursus, Tugas, dan Profil.
- [x] **Daftar Isi Kursus**: Halaman detail mata pelajaran menggunakan sistem **Accordion** untuk Bab dan materi.
- [x] **Halaman Ruang Belajar (Lesson Player)**: Komponen pemutar video embed dan pembaca teks dengan navigasi drawer.
-
-### 3. Fitur yang BELUM Diimplementasikan (Sisa Pekerjaan)
-#### Kelompok 2: Sisi Siswa
-- [ ] **Modul Kuis**: UI pengerjaan soal, Countdown Timer, dan navigasi nomor soal.
+ [x] **Modul Kuis**: UI pengerjaan soal, Countdown Timer, dan navigasi nomor soal.
 
 #### Kelompok 3: Sisi Pengajar (Guru)
-- [ ] **Dasbor Guru**: Statistik kelas yang diajar.
-- [ ] **Manajemen Materi**: Form untuk upload materi baru atau membuat kuis.
-- [ ] **Buku Nilai (Gradebook)**: Tabel rekapitulasi nilai siswa.
+- [x] **Dasbor Guru**: Ringkasan statistik (Siswa, Materi, Nilai Rata-rata).
+- [x] **Buku Nilai (Gradebook)**: Tabel rekapitulasi nilai siswa per kuis.
+
+### 3. Fitur yang BELUM Diimplementasikan (Sisa Pekerjaan)
+#### Kelompok 3: Sisi Pengajar (Guru)
+- [ ] **Manajemen Materi**: Form untuk upload materi baru atau membuat kuis (CRUD).
 
 #### Infrastruktur & Logic
 - [ ] **Routing Logic**: Menghubungkan tombol "Masuk" di Login ke Dashboard secara fungsional.
