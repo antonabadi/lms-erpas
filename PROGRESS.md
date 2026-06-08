@@ -19,12 +19,13 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 - [x] Sistem **Mock Data** (`mock-data.ts`) untuk simulasi profil user, daftar sekolah, dan silabus pelajaran.
 
 #### Kelompok 1: Akses & Autentikasi
-- [x] **Halaman Login**: UI dasar dengan pemilih unit sekolah (Multi-tenant) dan form input mobile-friendly.
+ [x] **Logic Autentikasi**: AuthContext untuk manajemen role (Siswa/Guru).
 
 #### Kelompok 2: Sisi Siswa
 - [x] **Dashboard Utama**: Header profil, widget "Lanjutkan Belajar", dan grid mata pelajaran.
 - [x] **Bottom Navigation**: Navigasi khusus mobile untuk akses cepat Beranda, Kursus, Tugas, dan Profil.
- [x] **Modul Kuis**: UI pengerjaan soal, Countdown Timer, dan navigasi nomor soal.
+ [x] **Modul Kuis**: UI pengerjaan soal, Countdown Timer.
+ [x] **Ruang Belajar (Lesson Player)**: Video player embed & reader teks materi.
 
 #### Kelompok 3: Sisi Pengajar (Guru)
 - [x] **Dasbor Guru**: Ringkasan statistik (Siswa, Materi, Nilai Rata-rata).
@@ -33,8 +34,8 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 
 ### 3. Fitur yang BELUM Diimplementasikan (Sisa Pekerjaan)
 #### Infrastruktur & Logic
-- [ ] **Auth Context**: Implementasi global state untuk membedakan view Siswa dan Guru.
-- [ ] **Routing Logic**: Menghubungkan tombol "Masuk" di Login ke Dashboard secara fungsional.
+- [x] **Auth Context**: Implementasi global state.
+- [x] **Routing Logic**: Redirect login berdasarkan role.
 - [ ] **State Management**: Menyimpan status login sederhana secara lokal.
 - [ ] **Integrasi API**: Transisi dari `mock-data.ts` ke API asli (jika backend sudah siap).
 
@@ -51,4 +52,4 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 
 ---
 *Terakhir diperbarui: Juni 2024*
-*Catatan: Fokus selanjutnya adalah Dashboard Guru dan Manajemen Materi.*
+*Catatan: Fokus selanjutnya adalah Integrasi Global State ke seluruh halaman.*
