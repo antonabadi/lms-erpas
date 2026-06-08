@@ -24,6 +24,7 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 #### Kelompok 2: Sisi Siswa
 - [x] **Dashboard Utama**: Header profil, widget "Lanjutkan Belajar", dan grid mata pelajaran.
 - [x] **Bottom Navigation**: Navigasi khusus mobile untuk akses cepat Beranda, Kursus, Tugas, dan Profil.
+- [x] **Daftar Isi Kursus (Course Detail)**: Struktur silabus per bab dengan indikator progres.
  [x] **Modul Kuis**: UI pengerjaan soal, Countdown Timer.
  [x] **Ruang Belajar (Lesson Player)**: Video player embed & reader teks materi.
 

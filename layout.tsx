@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "./AuthContext";
 
 export const metadata: Metadata = {
   title: "LMS Yayasan - Portal Belajar",
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="id" data-theme="light">
       <body className="min-h-screen bg-base-200 antialiased">
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
