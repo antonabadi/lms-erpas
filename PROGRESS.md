@@ -19,13 +19,13 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 - [x] Sistem **Mock Data** (`mock-data.ts`) untuk simulasi profil user, daftar sekolah, dan silabus pelajaran.
 
 #### Kelompok 1: Akses & Autentikasi
- [x] **Logic Autentikasi**: AuthContext untuk manajemen role (Siswa/Guru).
+ [x] **Logic Autentikasi & Persistensi**: AuthContext dengan dukungan `localStorage` agar login tidak hilang saat refresh.
 
 #### Kelompok 2: Sisi Siswa
 - [x] **Dashboard Utama**: Header profil, widget "Lanjutkan Belajar", dan grid mata pelajaran.
 - [x] **Bottom Navigation**: Navigasi khusus mobile untuk akses cepat Beranda, Kursus, Tugas, dan Profil.
-- [x] **Daftar Isi Kursus (Course Detail)**: Struktur silabus per bab dengan indikator progres.
- [x] **Modul Kuis**: UI pengerjaan soal, Countdown Timer.
+- [x] **Daftar Isi Kursus (Course Detail)**: Struktur silabus per bab (accordion) dengan indikator status materi.
+ [x] **Modul Kuis**: UI pengerjaan soal (Halaman Dasar).
  [x] **Ruang Belajar (Lesson Player)**: Video player embed & reader teks materi.
 
 #### Kelompok 3: Sisi Pengajar (Guru)
@@ -38,7 +38,9 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 - [x] **Auth Context**: Implementasi global state.
 - [x] **Routing Logic**: Redirect login berdasarkan role.
 - [x] **State Management**: Menyimpan status login sederhana secara lokal.
-- [ ] **Integrasi API**: Transisi dari `mock-data.ts` ke API asli (jika backend sudah siap).
+- [x] **Route Guarding**: Proteksi halaman dengan penanganan *loading state* (mencegah *flicker* saat refresh).
+- [ ] **Integrasi API**: Transisi dari `mock-data.ts` ke API asli.
+- [ ] **Quiz Logic**: Sistem penilaian kuis dan pengiriman hasil ke "Buku Nilai".
 
 ### 4. Struktur Folder Saat Ini
 ```text
@@ -53,4 +55,4 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 
 ---
 *Terakhir diperbarui: Juni 2024*
-*Catatan: Fokus selanjutnya adalah Integrasi Global State ke seluruh halaman.*
+*Catatan: Fondasi Autentikasi dan Navigasi Kursus selesai. Pekerjaan berikutnya: Logika Kuis atau Pembersihan UI (Logout & Profile).*
