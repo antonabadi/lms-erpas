@@ -36,7 +36,7 @@ Dokumen ini mencatat kemajuan pengembangan berdasarkan `gemini-blueprint-v1.txt`
 #### Infrastruktur & Logic
 - [x] **Auth Context**: Implementasi global state.
 - [x] **Routing Logic**: Redirect login berdasarkan role.
-- [ ] **State Management**: Menyimpan status login sederhana secara lokal.
+- [x] **State Management**: Menyimpan status login sederhana secara lokal.
 - [ ] **Integrasi API**: Transisi dari `mock-data.ts` ke API asli (jika backend sudah siap).
 
 ### 4. Struktur Folder Saat Ini

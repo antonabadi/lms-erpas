@@ -20,9 +20,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [role, setRole] = useState<UserRole>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    // Load from localStorage on initial mount
+    const storedUser = localStorage.getItem('lms_user');
+    const storedRole = localStorage.getItem('lms_role') as UserRole;
+    if (storedUser && storedRole) {
+      setUser(JSON.parse(storedUser));
+      setRole(storedRole);
+    }
+  }, []);
+
   const login = (selectedRole: UserRole) => {
     setRole(selectedRole);
-    setUser({ name: selectedRole === 'teacher' ? 'Budi Guru' : 'Ahmad Siswa' });
+    const userData = { name: selectedRole === 'teacher' ? 'Budi Guru' : 'Ahmad Siswa' };
+    setUser(userData);
+    localStorage.setItem('lms_user', JSON.stringify(userData));
+    localStorage.setItem('lms_role', selectedRole);
     // Simulasi redirect berdasarkan role
     router.push(selectedRole === 'teacher' ? '/teacher' : '/dashboard');
   };
@@ -30,6 +43,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     setUser(null);
     setRole(null);
+    localStorage.removeItem('lms_user');
+    localStorage.removeItem('lms_role');
     router.push('/login');
   };
 
